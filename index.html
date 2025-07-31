@@ -1,0 +1,424 @@
+<html lang="en" data-theme="glass">
+  <head>
+
+    <style>
+      :root {
+        --accent: #5ab8ff;
+        --accent-on: #05131c;
+
+        --canvas: #0b0f17;
+        --canvas--secondary: #0e1320;
+        --canvas-on: #d8dde7;
+        --canvas-on--secondary: #b8c1d6;
+
+        --well: rgba(255, 255, 255, .04);
+        --well-on: #d8dde7;
+
+        --border-radius--sm: 12px;
+        --border-radius--lg: 18px;
+        --border-radius--full: 9999px;
+
+        /* lower opacity and larger blur for larger surfaces so shadow doesn't feel heavy */
+        --shadow--lg-elev-1: 0 1px 3px -1px rgba(0,0,0,.22), 0 12px 24px rgba(0,0,0,.16);
+        --shadow--lg-elev-2: 0 2px 6px -2px rgba(0,0,0,.20), 0 20px 44px rgba(0,0,0,.18);
+        --shadow--lg-elev-3: 0 4px 10px -4px rgba(0,0,0,.18), 0 32px 64px rgba(0,0,0,.20);
+
+        /* higher edge opacity and smaller blur for small surfaces so shadow doesn't feel hazy */
+        --shadow--sm-elev-1: 0 1px 2px -1px rgba(0,0,0,.28), 0 6px 12px rgba(0,0,0,.18);
+        --shadow--sm-elev-2: 0 2px 4px -2px rgba(0,0,0,.26), 0 10px 24px rgba(0,0,0,.20);
+        --shadow--sm-elev-3: 0 4px 8px -4px rgba(0,0,0,.24), 0 18px 36px rgba(0,0,0,.22);
+
+        --spacing--1: 0.25rem;
+        --spacing--2: 0.5rem;
+        --spacing--3: 0.75rem;
+        --spacing--4: 1rem;
+        --spacing--5: 1.25rem;
+
+        --transition-hover: 180ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      :root[data-theme="glass"] {
+        --glass-border: rgba(255,255,255,.18);
+        --glass-highlight: rgba(255,255,255,.40);
+        --glass-saturation: 1.4;
+
+        --glass-background: rgba(255,255,255,.06);
+
+        --glass-blur--1: 4px;
+        --glass-blur--2: 10px;
+        --glass-blur--3: 18px;
+
+        --glass-border-color-a35: rgba(255,255,255,.35);
+
+        --glass-shadow--inner-sheen: inset 0 1px 0 var(--glass-highlight);
+        --glass-shadow--inner-ring: inset 0 0 0 1px var(--glass-border);
+
+        --glass-saturate: 140%;
+      }
+
+      @media (prefers-color-scheme: light) {
+        /* TODO: */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        background: var(--canvas);
+        color: var(--canvas-on);
+        font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+        line-height: 1.55;
+        margin:0;
+        min-height: 100%;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      :root[data-theme="glass"] {
+        body {
+          /* background: linear-gradient(#00005B 0, #000000 100%); */
+          /* background-image: url("bg-test.jpg");
+          background-attachment: fixed; */
+        }
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      :root[data-theme="glass"] {
+        .nav {
+          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
+          box-shadow:
+            var(--shadow--lg-elev-1),
+
+            /* var(--glass-shadow--inner-sheen) */
+          ;
+          border-bottom: 1px solid var(--glass-border);
+        }
+      }
+
+      .nav-content {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: .75rem 1rem;
+      }
+
+      .nav-title {
+        font-weight: 600;
+      }
+
+      .nav-title-secondary {
+        color: var(--canvas-on--secondary);
+        font-weight: 500;
+        margin-left: var(--spacing--2);
+      }
+
+      .main-content {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1rem 4rem;
+        display: grid;
+        row-gap: 2rem;
+        grid-template-areas:
+          "hero"
+          "skills"
+          "contact";
+      }
+
+      .main-content__hero {
+        grid-area: hero;
+      }
+
+      .main-content__skills {
+        grid-area: skills;
+      }
+
+      .main-content__contact {
+        grid-area: contact;
+      }
+
+      .card {
+        padding: var(--spacing--5);
+        border-radius: var(--border-radius--lg);
+      }
+
+      :root[data-theme="glass"] {
+        .card {
+          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--1));
+          box-shadow:
+            var(--shadow--lg-elev-1),
+            var(--glass-shadow--inner-sheen),
+            var(--glass-shadow--inner-ring)
+          ;
+        }
+      }
+
+      .card__title {
+        font-weight: 700;
+        margin-bottom: var(--spacing--3);
+      }
+
+      h1.card__title {
+        font-size: clamp(28px, 4vw, 40px);
+        line-height: 1.1em;
+      }
+
+      h2.card__title {
+        font-size: 1.1rem;
+        font-weight:700;
+        letter-spacing:.3px;
+      }
+
+      .card__tagline {
+        color:var(--canvas-on--secondary);
+      }
+
+      .skills {
+        display: grid;
+        gap: var(--spacing--3);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .well {
+        padding: var(--spacing--3);
+        border-radius: var(--radius-sm);
+        background: var(--well);
+        color: var(--well-on);
+      }
+
+      .well-title {
+        font-size: .95rem;
+        font-weight: 600;
+        margin-bottom: var(--spacing--3);
+        color: var(--ink);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing--2);
+        font-size: .9rem;
+      }
+
+      .chip {
+        border-radius: var(--border-radius--full);
+        padding: var(--spacing--1) var(--spacing--3);
+      }
+
+      :root[data-theme="glass"] {
+        .chip {
+          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
+          box-shadow:
+            var(--glass-shadow--inner-sheen),
+            var(--glass-shadow--inner-ring)
+          ;
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: var(--spacing--2);
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing--2);
+        font-weight: 600;
+        letter-spacing: .2px;
+        white-space: nowrap;
+        padding: var(--spacing--2) var(--spacing--4);
+        border-radius: var(--border-radius--sm);
+        transition:
+          transform var(--transition-hover),
+          box-shadow var(--transition-hover),
+          background var(--transition-hover);
+        color: var(--ink);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm-elev-2);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      :root[data-theme="glass"] {
+        .btn {
+          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--1));
+          box-shadow:
+            var(--glass-shadow--inner-sheen),
+            var(--glass-shadow--inner-ring)
+          ;
+        }
+
+        .bth:hover {
+          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--2));
+        }
+
+        .btn:active {
+          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--1));
+        }
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        color: var(--accent-on);
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <header class="nav" role="banner" aria-label="Top navigation">
+      <div class="nav-content">
+        <div class="nav-title">
+          Brad Bowie <small class="nav-title-secondary">Principal/Staff Engineer</small>
+        </div>
+
+        <nav class="actions" aria-label="Primary actions">
+          <a
+            class="btn primary"
+            href="mailto:brad@example.com?subject=Opportunity%20for%20Brad"
+          >
+            Email me
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="content">
+      <div  class="main-content">
+
+        <section class="main-content__hero card">
+          <h1 class="card__title">
+            Building thoughtful, fast, and scalable products.
+          </h1>
+
+          <p class="card__tagline">
+            Results&hyphen;oriented full&hyphen;stack architect (15+ yrs) with a product mindset. I design systems, lead teams,
+            and ship data&hyphen;heavy SaaS in React/Next.js and GCP/GKE. Recently focused on AI agents & workflows that remove busywork.
+          </p>
+
+          <div class="chips" role="list">
+            <span class="chip" role="listitem">Atlanta, GA • US&hyphen;ET</span>
+            <span class="chip" role="listitem">Remote / Hybrid</span>
+          </div>
+        </section>
+
+        <section
+          id="skills"
+          class="main-content__skills card"
+          aria-labelledby="skills-title"
+        >
+          <h2 class="card__title">
+            Skills
+          </h2>
+
+          <div class="skills">
+            <div class="well">
+              <div class="well-title">Languages</div>
+              <div class="chips">
+                <span class="chip">TypeScript/JS</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">SQL</span>
+                <span class="chip">Java</span>
+                <span class="chip">Go</span>
+              </div>
+            </div>
+
+            <div class="well">
+              <div class="well-title">Front&hyphen;End</div>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">Next.js</span>
+                <span class="chip">Design Systems</span>
+                <span class="chip">Storybook</span>
+                <span class="chip">D3</span>
+                <span class="chip">PWA</span>
+              </div>
+            </div>
+
+            <div class="well">
+              <div class="well-title">Back&hyphen;End & APIs</div>
+              <div class="chips">
+                <span class="chip">REST</span>
+                <span class="chip">GraphQL</span>
+                <span class="chip">OAuth/JWT</span>
+                <span class="chip">Custom DSLs</span>
+              </div>
+            </div>
+
+            <div class="well">
+              <div class="well-title">Databases</div>
+              <div class="chips">
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">CRDB</span>
+                <span class="chip">Redis</span>
+                <span class="chip">Mongo</span>
+              </div>
+            </div>
+
+            <div class="well">
+              <div class="well-title">AI</div>
+              <div class="chips">
+                <span class="chip">OpenAI/Anthropic</span>
+                <span class="chip">Agents & MCP</span>
+                <span class="chip">RAG</span>
+                <span class="chip">Prompting/Workflows</span>
+                <span class="chip">LangChain</span>
+              </div>
+            </div>
+
+            <div class="well">
+              <div class="well-title">DevOps & Quality</div>
+              <div class="chips">
+                <span class="chip">Docker</span>
+                <span class="chip">GCP</span>
+                <span class="chip">Kubernetes/GKE</span>
+                <span class="chip">Argo CD</span>
+                <span class="chip">GitHub Actions</span>
+                <span class="chip">Jest/RTL</span>
+                <span class="chip">TDD</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="card" aria-labelledby="contact-title">
+          <h2 class="card__title">Get in touch</h2>
+
+          <p class="card__tagline">
+            Best way to reach me is email. If you’d like a one‑pager, use the PDF below.
+          </p>
+
+          <p class="actions">
+            <a class="btn primary" href="mailto:brad@example.com?subject=Opportunity%20for%20Brad">Email me</a>
+            <a class="btn" href="resume.pdf" download>Download PDF</a>
+            <a class="btn" href="https://github.com/your-handle" aria-label="GitHub profile">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/your-handle" aria-label="LinkedIn profile">LinkedIn</a>
+          </p>
+        </section>
+      </div>
+    </main>
+
+  </body>
+</html>
