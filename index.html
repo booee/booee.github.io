@@ -1,60 +1,64 @@
+<!DOCTYPE html>
 <html lang="en" data-theme="glass">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Brad Bowie — Principal/Staff Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
       :root {
-        --accent: #5ab8ff;
+        --accent: rgb(90, 184, 255);
         --accent-on: #05131c;
 
-        --canvas: #0b0f17;
-        --canvas--secondary: #0e1320;
-        --canvas-on: #d8dde7;
-        --canvas-on--secondary: #b8c1d6;
+        --canvas: rgb(11, 15, 23);
+        --canvas-on: rgb(216, 221, 231);
+        --canvas-on--secondary: rgb(184, 193, 214);
 
-        --card: rgb(255, 255, 255, .06);
-        --card-on: #d8dde7;
-
-        --chip: rgb(95, 208, 255, .06);
-        --chip-on: #d8dde7;
-
-        --nav: rgb(255, 255, 255, .06);
-        --nav-on: #d8dde7;
+        --chip: rgba(255, 255, 255, .08);
+        --chip-on: rgb(216, 221, 231);
 
         --well: rgba(255, 255, 255, .04);
-        --well-on: #d8dde7;
+        --well-on: rgb(216, 221, 231);
+
+        --bg-opacity: .15;
 
         --border-radius--sm: 12px;
         --border-radius--lg: 18px;
         --border-radius--full: 9999px;
 
+        color-scheme: dark light;
+
+        --content-max-width: 960px;
+
         /* lower opacity and larger blur for larger surfaces so shadow doesn't feel heavy */
         --shadow--lg-elev-1: 0 1px 3px -1px rgba(0,0,0,.22), 0 12px 24px rgba(0,0,0,.16);
-        --shadow--lg-elev-2: 0 2px 6px -2px rgba(0,0,0,.20), 0 20px 44px rgba(0,0,0,.18);
-        --shadow--lg-elev-3: 0 4px 10px -4px rgba(0,0,0,.18), 0 32px 64px rgba(0,0,0,.20);
+        /* --shadow--lg-elev-2: 0 2px 6px -2px rgba(0,0,0,.20), 0 20px 44px rgba(0,0,0,.18); */
+        /* --shadow--lg-elev-3: 0 4px 10px -4px rgba(0,0,0,.18), 0 32px 64px rgba(0,0,0,.20); */
 
         /* higher edge opacity and smaller blur for small surfaces so shadow doesn't feel hazy */
         --shadow--sm-elev-1: 0 1px 2px -1px rgba(0,0,0,.28), 0 6px 12px rgba(0,0,0,.18);
         --shadow--sm-elev-2: 0 2px 4px -2px rgba(0,0,0,.26), 0 10px 24px rgba(0,0,0,.20);
-        --shadow--sm-elev-3: 0 4px 8px -4px rgba(0,0,0,.24), 0 18px 36px rgba(0,0,0,.22);
+        /* --shadow--sm-elev-3: 0 4px 8px -4px rgba(0,0,0,.24), 0 18px 36px rgba(0,0,0,.22); */
 
         --spacing--1: 0.25rem;
         --spacing--2: 0.5rem;
         --spacing--3: 0.75rem;
         --spacing--4: 1rem;
         --spacing--5: 1.25rem;
-
-        --transition-hover: 180ms cubic-bezier(.2,.8,.2,1);
+        --spacing--6: 2rem;
       }
 
       :root[data-theme="glass"] {
+        --glass: rgba(255,255,255,.06);
         --glass-border: rgba(255,255,255,.18);
-        --glass-highlight: rgba(255,255,255,.40);
+        --glass-border--highlight: rgba(255,255,255,.40);
 
         --glass-blur--1: 4px;
         --glass-blur--2: 10px;
         --glass-blur--3: 18px;
 
-        --glass-shadow--inner-sheen: inset 0 1px 0 var(--glass-highlight);
+        --glass-shadow--inner-sheen: inset 0 1px 0 var(--glass-border--highlight);
         --glass-shadow--inner-ring: inset 0 0 0 1px var(--glass-border);
 
         --glass-saturate: 140%;
@@ -66,26 +70,22 @@
           --accent-on: rgb(255, 255, 255);
 
           --canvas: rgb(245, 247, 251);
-          --canvas--secondary: rgb(233, 238, 247);
           --canvas-on: rgb(17, 19, 23);
-          --canvas-on--secondary: rgb(76, 85, 104);
+          --canvas-on--secondary: rgb(17, 19, 23);
 
-          --card: rgb(255, 255, 255, .06);
-          --card-on: rgb(17, 19, 23);
-
-          --chip: rgba(238, 174, 96, 0.24);
+          --chip: rgba(0, 128, 255, 0.14);
           --chip-on: rgb(17, 19, 23);
-
-          --nav: rgb(255, 255, 255, .06);
-          --nav-on: rgb(17, 19, 23);
 
           --well: rgba(76, 85, 104, .06);
           --well-on: rgb(17, 19, 23);
+
+          --bg-opacity: .3;
         }
 
         :root[data-theme="glass"] {
+          --glass: rgba(0, 0, 0, .06);
           --glass-border: rgba(0, 0, 0, .06);
-          --glass-highlight: rgba(255,255,255,.40);
+          --glass-border--highlight: rgba(255,255,255,.40);
         }
       }
 
@@ -94,29 +94,45 @@
       }
 
       html, body {
-        height: 100%;
+        min-height: 100%;
+      }
+
+      body {
+        position: relative;
+        background: var(--canvas);
+        color: var(--canvas-on);
+        font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+        line-height: 1.55;
+        margin:0;
+        /* overflow-x: hidden; */
+        -webkit-font-smoothing: antialiased;
       }
 
       .bg {
-        position: fixed;
-        height: 100vh;
-        width: 200vw;
-        left: -70%;
-        bottom: 60%;
+        contain: paint;
+        position: absolute;
+        min-height: max(100vh, 100%);
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
         overflow: hidden;
-        opacity: .3;
-        transform: rotate(-12deg);
+        opacity: var(--bg-opacity);
       }
 
       .bg-shape {
         position: absolute;
         height: 80%;
         width: 80%;
-        filter: blur(40px);
+        will-change: transform, opacity;
+        filter: blur(32px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bg-shape { animation: none; opacity: .2; }
       }
 
       .bg-shape-1 {
-        background: radial-gradient(rgb(95, 208, 255), rgba(0, 0, 0, 0));
+        background: radial-gradient(rgb(212, 95, 255), rgba(0, 0, 0, 0));
         top: 0;
         left: 0;
         border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -124,7 +140,7 @@
       }
 
       .bg-shape-2 {
-        background: radial-gradient(rgb(226, 96, 238), rgba(0, 0, 0, 0));
+        background: radial-gradient(rgb(157, 238, 96), rgba(0, 0, 0, 0));
         top: 0;
         right: 0;
         border-radius: 20% 76% 30% 80% / 71% 79% 70% 30%;
@@ -132,7 +148,7 @@
       }
 
       .bg-shape-3 {
-        background: radial-gradient(rgb(233, 159, 0), rgba(0, 0, 0, 0));
+        background: radial-gradient(rgb(98, 218, 245), rgba(0, 0, 0, 0));
         bottom: 0;
         right: 0;
         border-radius: 71% 29% 37% 63% / 70% 16% 84% 30%;
@@ -140,7 +156,7 @@
       }
 
       .bg-shape-4 {
-        background: radial-gradient(rgb(184, 15, 15), rgba(0, 0, 0, 0));
+        background: radial-gradient(var(--accent), rgba(0, 0, 0, 0));
         bottom: 0;
         left: 0;
         border-radius: 71% 29% 37% 63% / 70% 16% 84% 30%;
@@ -168,67 +184,73 @@
         }
       }
 
-      body {
-        background: var(--canvas);
-        color: var(--canvas-on);
-        font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
-        line-height: 1.55;
-        margin:0;
-        min-height: 100%;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-
       .nav {
-        background-color: var(--nav);
-        color: var(--nav-on);
         position: sticky;
         top: 0;
         z-index: 50;
       }
 
-      :root[data-theme="glass"] {
-        .nav {
-          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
-          box-shadow:
-            var(--shadow--lg-elev-1),
-
-            /* var(--glass-shadow--inner-sheen) */
-          ;
-          border-bottom: 1px solid var(--glass-border);
-        }
+      :root[data-theme="glass"] .nav {
+        margin-top: var(--spacing--2);
+        top: var(--spacing--2);
       }
 
       .nav-content {
+        max-width: var(--content-max-width);
+        margin: 0 auto;
+      }
+
+      .nav-bar {
         align-items: center;
         display: flex;
         gap: 1rem;
         justify-content: space-between;
-        max-width: 960px;
-        margin: 0 auto;
-        padding: .75rem 1rem;
+        padding: var(--spacing--3) var(--spacing--5);
+      }
+
+      :root[data-theme="glass"] .nav-bar {
+        padding: 0 0.25rem;
       }
 
       .nav-title {
         font-weight: 600;
+        flex-grow: 1;
+      }
+
+      :root[data-theme="glass"] .nav-title {
+        backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
+        box-shadow:
+          var(--shadow--lg-elev-1),
+          var(--glass-shadow--inner-sheen)
+        ;
+        border-radius: var(--border-radius--full);
+        border-bottom: 1px solid var(--glass-border);
+        padding: var(--spacing--3) var(--spacing--4);
+      }
+
+      @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        :root[data-theme="glass"] .nav-title {
+          background: var(--glass);
+          box-shadow: var(--shadow--lg-elev-1);
+        }
       }
 
       .nav-title-secondary {
         color: var(--canvas-on--secondary);
         font-weight: 500;
-        margin-left: var(--spacing--2);
       }
 
       .main-content {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 2rem 1rem 4rem;
         display: grid;
-        row-gap: 2rem;
         grid-template-areas:
           "hero"
           "skills"
-          "contact";
+          "contact"
+        ;
+        max-width: var(--content-max-width);
+        margin: 0 auto;
+        padding-top: var(--spacing--5);
+        row-gap: var(--spacing--6);
       }
 
       .main-content__hero {
@@ -244,21 +266,8 @@
       }
 
       .card {
-        background-color: var(--card);
-        color: var(--card-on);
-        padding: var(--spacing--5);
+        padding: var(--spacing--3) var(--spacing--5);
         border-radius: var(--border-radius--lg);
-      }
-
-      :root[data-theme="glass"] {
-        .card {
-          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--1));
-          box-shadow:
-            var(--shadow--lg-elev-1),
-            var(--glass-shadow--inner-sheen),
-            var(--glass-shadow--inner-ring)
-          ;
-        }
       }
 
       .card__title {
@@ -277,10 +286,6 @@
         letter-spacing:.3px;
       }
 
-      .card__tagline {
-        color:var(--canvas-on--secondary);
-      }
-
       .skills {
         display: grid;
         gap: var(--spacing--3);
@@ -291,13 +296,11 @@
         padding: var(--spacing--3);
         border-radius: var(--border-radius--sm);
         background: var(--well);
-        color: var(--well-on);
       }
 
       .well-title {
-        color: var(--ink);
-        font-size: .8rem;
-        font-weight: 600;
+        font-size: smaller;
+        font-weight: 700;
         margin-bottom: var(--spacing--3);
         text-transform: uppercase;
       }
@@ -306,24 +309,14 @@
         display: flex;
         flex-wrap: wrap;
         gap: var(--spacing--2);
-        font-size: .9rem;
       }
 
       .chip {
         background-color: var(--chip);
         border-radius: var(--border-radius--full);
         color: var(--chip-on);
+        font-size: small;
         padding: var(--spacing--1) var(--spacing--3);
-      }
-
-      :root[data-theme="glass"] {
-        .chip {
-          backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
-          box-shadow:
-            var(--glass-shadow--inner-sheen),
-            var(--glass-shadow--inner-ring)
-          ;
-        }
       }
 
       .actions {
@@ -334,54 +327,115 @@
       }
 
       .btn {
-        display: inline-flex;
+        --transition-hover: 180ms cubic-bezier(.2,.8,.2,1);
+
         align-items: center;
-        justify-content: center;
-        gap: var(--spacing--2);
+        color: var(--canvas-on);
+        display: inline-flex;
         font-weight: 600;
+        gap: var(--spacing--2);
+        justify-content: center;
         letter-spacing: .2px;
-        white-space: nowrap;
-        padding: var(--spacing--2) var(--spacing--4);
-        border-radius: var(--border-radius--sm);
+        padding: var(--spacing--3);
+        text-decoration: none;
         transition:
           transform var(--transition-hover),
           box-shadow var(--transition-hover),
-          background var(--transition-hover);
-        color: var(--ink);
+          background var(--transition-hover)
+        ;
+        white-space: nowrap;
       }
 
-      :root[data-theme="glass"] {
-        .btn {
-          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--1));
-          box-shadow:
-            var(--glass-shadow--inner-sheen),
-            var(--glass-shadow--inner-ring)
-          ;
-        }
+      :root[data-theme="glass"] .btn {
+        backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--1));
+        box-shadow:
+          var(--shadow--lg-elev-1),
+          var(--glass-shadow--inner-sheen),
+          var(--glass-shadow--inner-ring)
+        ;
+        border-radius: var(--border-radius--full);
+      }
 
-        .btn:hover {
-          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--2));
-          box-shadow:
-            var(--shadow--sm-elev-1),
-            var(--glass-shadow--inner-sheen),
-            var(--glass-shadow--inner-ring)
-          ;
-          transform: translateY(-2px);
-        }
+      :root[data-theme="glass"] .btn:hover,
+      :root[data-theme="glass"] .btn:focus {
+        backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--2));
+        box-shadow:
+          var(--shadow--sm-elev-2),
+          var(--glass-shadow--inner-sheen),
+          var(--glass-shadow--inner-ring)
+        ;
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
 
-        .btn:active {
-          backdrop-filter: saturate(--glass-saturate) blur(var(--glass-blur--1));
-          box-shadow:
-            var(--glass-shadow--inner-sheen),
-            var(--glass-shadow--inner-ring)
-          ;
-          transform: translateY(0);
+      :root[data-theme="glass"] .btn:active {
+        backdrop-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur--1));
+        box-shadow:
+          var(--shadow--lg-elev-1),
+          var(--glass-shadow--inner-sheen),
+          var(--glass-shadow--inner-ring)
+        ;
+        transform: translateY(0);
+      }
+
+      @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        :root[data-theme="glass"] .btn {
+          background: var(--glass);
+          box-shadow: var(--shadow--lg-elev-1);
         }
       }
 
-      .btn.primary {
-        background: var(--accent);
-        color: var(--accent-on);
+      .link {
+        color: inherit;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      .link:visited {
+        color: var(--canvas-on);
+      }
+
+      .link:hover, .link:focus {
+        color: var(--accent);
+      }
+
+      .link:active {
+        text-decoration: none;
+      }
+
+      .icon {
+        height: 1.25rem;
+        width: 1.25rem;
+        fill: currentColor;
+      }
+
+      .icon--lg {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+
+        :root[data-theme="glass"] .nav-bar {
+          padding: 0 var(--spacing--3);
+          gap: var(--spacing--2);
+        }
+
+        .nav-title-secondary {
+          display: none;
+        }
+
+        .card {
+          padding: var(--spacing--3) var(--spacing--4);
+        }
+
+        .skills {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .main-content {
+          padding: var(--spacing--5) var(--spacing--3);
+        }
       }
     </style>
 
@@ -398,25 +452,38 @@
 
     <header class="nav" role="banner" aria-label="Top navigation">
       <div class="nav-content">
-        <div class="nav-title">
-          Brad Bowie <small class="nav-title-secondary">Principal/Staff Engineer</small>
-        </div>
+        <div class="nav-bar">
+          <div class="nav-title">
+            <span>Brad Bowie</span> <small class="nav-title-secondary">Principal/Staff Engineer</small>
+          </div>
 
-        <div class="actions" aria-label="Primary actions">
-          <a class="btn primary" href="mailto:someemail@brad.com?subject=Opportunity%20for%20Brad">Email me</a>
+          <div class="actions" aria-label="filled actions">
+            <a class="btn" href="#">
+              <svg class="icon icon--lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>linkedin</title>
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+              </svg>
+            </a>
+
+            <a class="btn" href="#">
+              <svg class="icon icon--lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>github</title>
+                <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </header>
 
     <main id="content">
       <div  class="main-content">
-
         <section class="main-content__hero card">
           <h1 class="card__title">
             Building thoughtful, fast, and scalable products.
           </h1>
 
-          <p class="card__tagline">
+          <p>
             Results&hyphen;oriented full&hyphen;stack technical leader with a product mindset. I design systems, lead teams,
             and ship data&hyphen;heavy SaaS in React/Next.js and GCP/GKE. Recently focused on AI agents & workflows that remove busywork.
           </p>
@@ -512,17 +579,36 @@
 
 
         <section class="card" aria-labelledby="contact-title">
-          <h2 class="card__title">Get in touch</h2>
+          <h2 class="card__title">Get in touch!</h2>
 
-          <p class="card__tagline">
-            Best way to reach me is email. If you’d like a one‑pager, use the PDF below.
+          <p>
+            Best way to reach me is via <a class="link" href="https://www.linkedin.com/in/something" aria-label="LinkedIn profile">LinkedIn</a>. If you&apos;d like a one&hyphen;pager, <a class="link" href="resume.pdf" aria-label="PDF profile">download</a> the PDF version.
           </p>
 
           <p class="actions">
-            <a class="btn primary" href="mailto:someemail@brad.com?subject=Opportunity%20for%20Brad">Email me</a>
-            <a class="btn" href="resume.pdf" download>Download PDF</a>
-            <a class="btn" href="https://github.com/booee" aria-label="GitHub profile">GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/something" aria-label="LinkedIn profile">LinkedIn</a>
+            <a class="btn" href="https://www.linkedin.com/in/something" aria-label="LinkedIn profile">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>linkedin</title>
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+              </svg>
+              LinkedIn
+            </a>
+
+            <a class="btn" href="https://github.com/booee" aria-label="GitHub profile">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>github</title>
+                <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+              </svg>
+              GitHub
+            </a>
+
+            <a class="btn" href="resume.pdf" download>
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>download</title>
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+              </svg>
+              Download PDF
+            </a>
           </p>
         </section>
       </div>
