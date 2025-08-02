@@ -115,24 +115,19 @@
       }
 
       body {
+        position: relative;
         background: var(--canvas);
         color: var(--canvas-on);
         font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
         line-height: 1.55;
         margin:0;
-        /* overflow-x: hidden; */
         -webkit-font-smoothing: antialiased;
-      }
-
-      .bg-wrapper {
-        position: relative;
       }
 
       .bg {
         contain: paint;
         position: absolute;
         min-height: max(100vh, 100%);
-        top: 0;
         inset: 0;
         z-index: -1;
         pointer-events: none;
@@ -467,13 +462,11 @@
   <body>
     <a href="#content" class="skip-link">Skip to main content</a>
 
-    <div class="bg-wrapper" aria-hidden="true">
-      <div class="bg">
-        <div class="bg-shape bg-shape-1"></div>
-        <div class="bg-shape bg-shape-2"></div>
-        <div class="bg-shape bg-shape-3"></div>
-        <div class="bg-shape bg-shape-4"></div>
-      </div>
+    <div class="bg" aria-hidden="true">
+      <div class="bg-shape bg-shape-1"></div>
+      <div class="bg-shape bg-shape-2"></div>
+      <div class="bg-shape bg-shape-3"></div>
+      <div class="bg-shape bg-shape-4"></div>
     </div>
 
     <header class="nav" role="banner">
