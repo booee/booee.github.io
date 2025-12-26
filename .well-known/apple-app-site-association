@@ -3,7 +3,8 @@
     "details": [
       {
         "appIDs": [
-          "93S9VHKKT9.com.example.poccredmanagertest"
+          "93S9VHKKT9.com.example.poccredmanagertest",
+          "R9M8FXRKUU.org.reactjs.native.example.poccredentials"
         ],
         "paths": [
           "*"
@@ -13,6 +14,7 @@
   },
   "webcredentials": {
     "apps": [
+      "R9M8FXRKUU.org.reactjs.native.example.poccredentials",
       "93S9VHKKT9.com.example.poccredmanagertest"
     ]
   }
